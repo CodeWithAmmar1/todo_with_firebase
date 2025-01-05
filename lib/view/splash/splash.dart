@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo/control/splash_controller.dart';
+import 'package:todo/controller/splash_controller.dart';
 
 class Splash extends StatelessWidget {
   Splash({super.key}) {

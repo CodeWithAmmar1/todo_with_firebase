@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:todo/control/signup_controller.dart';
+import 'package:todo/controller/signup_controller.dart';
 import 'package:todo/view/custom_button/button.dart';
 
 class Signup extends StatelessWidget {
@@ -49,18 +49,18 @@ class Signup extends StatelessWidget {
                     controller: _signupController.nameController,
                     decoration: const InputDecoration(
                       filled: true,
-                      fillColor: const Color(0xffDEDEDE),
-                      border: const OutlineInputBorder(
+                      fillColor: Color(0xffDEDEDE),
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                       ),
-                      enabledBorder: const OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                         borderSide: BorderSide(
                           color: Color(0xffDEDEDE),
                           width: 1,
                         ),
                       ),
-                      focusedBorder: const OutlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                         borderSide: BorderSide(
                           color: Color(0xffDEDEDE),
@@ -68,12 +68,12 @@ class Signup extends StatelessWidget {
                         ),
                       ),
                       labelText: "Name",
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                         fontSize: 24,
                         color: Color(0xff6F6F6F),
                         fontWeight: FontWeight.w400,
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         vertical: 20.0,
                         horizontal: 30,
                       ),
@@ -89,18 +89,18 @@ class Signup extends StatelessWidget {
                     controller: _signupController.emailController,
                     decoration: const InputDecoration(
                       filled: true,
-                      fillColor: const Color(0xffDEDEDE),
-                      border: const OutlineInputBorder(
+                      fillColor: Color(0xffDEDEDE),
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                       ),
-                      enabledBorder: const OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                         borderSide: BorderSide(
                           color: Color(0xffDEDEDE),
                           width: 1,
                         ),
                       ),
-                      focusedBorder: const OutlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                         borderSide: BorderSide(
                           color: Color(0xffDEDEDE),
@@ -108,12 +108,12 @@ class Signup extends StatelessWidget {
                         ),
                       ),
                       labelText: "Email",
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                         fontSize: 24,
                         color: Color(0xff6F6F6F),
                         fontWeight: FontWeight.w400,
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         vertical: 20.0,
                         horizontal: 30,
                       ),
@@ -129,18 +129,18 @@ class Signup extends StatelessWidget {
                     controller: _signupController.passwordController,
                     decoration: const InputDecoration(
                       filled: true,
-                      fillColor: const Color(0xffDEDEDE),
-                      border: const OutlineInputBorder(
+                      fillColor: Color(0xffDEDEDE),
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                       ),
-                      enabledBorder: const OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                         borderSide: BorderSide(
                           color: Color(0xffDEDEDE),
                           width: 1,
                         ),
                       ),
-                      focusedBorder: const OutlineInputBorder(
+                      focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(22)),
                         borderSide: BorderSide(
                           color: Color(0xffDEDEDE),

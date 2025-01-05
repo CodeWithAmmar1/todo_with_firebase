@@ -1,16 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo/control/home_page_controller.dart';
+import 'package:todo/controller/complete_task_controller.dart';
+import 'package:todo/controller/home_page_controller.dart';
+import 'package:todo/model/task_model.dart';
+import 'package:todo/utils/firebase_service.dart';
 import 'package:todo/view/login/login.dart';
 
 class CompleteTask extends StatelessWidget {
-  const CompleteTask({super.key});
+  CompleteTask({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomePageController>(
-        init: HomePageController(),
+    return GetBuilder<CompleteTaskController>(
+        init: CompleteTaskController(),
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
@@ -20,7 +23,14 @@ class CompleteTask extends StatelessWidget {
                   const Text("T O D O"),
                   Row(
                     children: [
-                      IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                      IconButton(
+                          onPressed: () async {
+                            await FirebaseService()
+                                .deleteAllTaskToFirebase(controller.allDocId);
+                            controller.allDocId.clear();
+                            controller.update();
+                          },
+                          icon: Icon(Icons.delete)),
                     ],
                   )
                 ],
@@ -30,26 +40,56 @@ class CompleteTask extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 8,
+                    itemCount: controller.allTaskData.length,
                     itemBuilder: (context, index) {
-                      bool isChecked = false;
+                      // bool isChecked = false;
+                      TaskModel data = controller.allTaskData[index];
 
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          minTileHeight: 80,
-                          tileColor: Colors.grey,
-                          leading: Checkbox(
-                            value: isChecked, // Use the state variable here
-                            onChanged: (bool? newValue) {
-                              // Handle checkbox state change
-
-                              isChecked = newValue ?? false;
+                          onTap: () {
+                            if (controller.allDocId.isNotEmpty) {
+                              if (controller.allDocId.contains(data.docId) ==
+                                  true) {
+                                controller.allDocId.remove(data.docId ?? '');
+                              } else {
+                                controller.allDocId.add(data.docId ?? '');
+                              }
                               controller.update();
-                            },
+                            }
+                          },
+                          onLongPress: () {
+                            if (controller.allDocId.isEmpty) {
+                              controller.allDocId.add(data.docId ?? '');
+                              controller.update();
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          title: Text("Title"),
-                          subtitle: Text("Description"),
+                          minTileHeight: 80,
+                          tileColor:
+                              controller.allDocId.contains(data.docId) == true
+                                  ? Colors.red
+                                  : Colors.grey,
+                          leading: IconButton(
+                              padding: const EdgeInsets.all(0),
+                              onPressed: () {
+                                TaskModel dataUpdate =
+                                    data.copyWith(status: 'Uncompleted');
+                                FirebaseService()
+                                    .updateTaskToFirebase(dataUpdate);
+                              },
+                              icon: const Icon(
+                                Icons.check_box_rounded,
+                                color: Colors.black,
+                              )),
+                          title: Text(data.title),
+                          subtitle: Text(
+                            "${data.description}\nCompleted by: \n${controller.formatDate(data.completedByDate ?? DateTime(2024))} ${controller.formatTimeOfDay(data.completedByTime ?? TimeOfDay(hour: 0, minute: 0))}\nCreated at: ${controller.formatDate(data.createdAt)}",
+                            style: TextStyle(fontSize: 12),
+                          ),
                           trailing: Column(
                             children: [
                               SizedBox(
@@ -58,11 +98,11 @@ class CompleteTask extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.edit),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        await FirebaseService()
+                                            .deleteAllTaskToFirebase(
+                                                [data.docId ?? ""]);
+                                      },
                                       icon: Icon(Icons.delete),
                                     ),
                                   ],
@@ -70,11 +110,15 @@ class CompleteTask extends StatelessWidget {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color: Colors.amber,
+                                    color: data.priority == 'High'
+                                        ? Colors.red
+                                        : data.priority == 'Low'
+                                            ? Colors.green
+                                            : Colors.amber,
                                     borderRadius: BorderRadius.circular(20)),
                                 width: 50,
                                 height: 20,
-                                child: Center(child: Text("HIGH")),
+                                child: Center(child: Text(data.priority ?? '')),
                               )
                             ],
                           ),
