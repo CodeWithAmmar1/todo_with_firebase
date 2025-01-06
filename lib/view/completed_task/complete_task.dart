@@ -20,7 +20,13 @@ class CompleteTask extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("T O D O"),
+                  Text(
+                    "T O D O",
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Color(0xffFF5A5F),
+                        fontWeight: FontWeight.bold),
+                  ),
                   Row(
                     children: [
                       IconButton(
@@ -30,7 +36,10 @@ class CompleteTask extends StatelessWidget {
                             controller.allDocId.clear();
                             controller.update();
                           },
-                          icon: Icon(Icons.delete)),
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          )),
                     ],
                   )
                 ],
@@ -42,7 +51,6 @@ class CompleteTask extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: controller.allTaskData.length,
                     itemBuilder: (context, index) {
-                      // bool isChecked = false;
                       TaskModel data = controller.allTaskData[index];
 
                       return Padding(
@@ -72,7 +80,7 @@ class CompleteTask extends StatelessWidget {
                           tileColor:
                               controller.allDocId.contains(data.docId) == true
                                   ? Colors.red
-                                  : Colors.grey,
+                                  : Colors.green.withOpacity(0.3),
                           leading: IconButton(
                               padding: const EdgeInsets.all(0),
                               onPressed: () {
@@ -82,13 +90,61 @@ class CompleteTask extends StatelessWidget {
                                     .updateTaskToFirebase(dataUpdate);
                               },
                               icon: const Icon(
-                                Icons.check_box_rounded,
-                                color: Colors.black,
+                                Icons.check_circle,
+                                color: Color.fromARGB(255, 20, 224, 27),
                               )),
-                          title: Text(data.title),
-                          subtitle: Text(
-                            "${data.description}\nCompleted by: \n${controller.formatDate(data.completedByDate ?? DateTime(2024))} ${controller.formatTimeOfDay(data.completedByTime ?? TimeOfDay(hour: 0, minute: 0))}\nCreated at: ${controller.formatDate(data.createdAt)}",
-                            style: TextStyle(fontSize: 12),
+                          title: Text(data.title,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20)),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.description,
+                                style: const TextStyle(fontSize: 15),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "Completed by: ",
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text:
+                                          "\n${controller.formatDate(data.completedByDate ?? DateTime(2024))} ${controller.formatTimeOfDay(data.completedByTime ?? const TimeOfDay(hour: 0, minute: 0))}" // The normal part
+                                      ,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "Created at: ",
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text:
+                                          controller.formatDate(data.createdAt),
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                           trailing: Column(
                             children: [

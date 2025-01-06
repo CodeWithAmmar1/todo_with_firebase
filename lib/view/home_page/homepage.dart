@@ -6,22 +6,10 @@ import 'package:todo/model/task_model.dart';
 import 'package:todo/utils/dialogs.dart';
 import 'package:todo/utils/firebase_service.dart';
 import 'package:todo/view/completed_task/complete_task.dart';
-import 'package:todo/view/custom_button/button.dart';
 import 'package:todo/view/login/login.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
-  Color getColor(Set<WidgetState> states) {
-    const Set<WidgetState> interactiveStates = <WidgetState>{
-      WidgetState.pressed,
-      WidgetState.hovered,
-      WidgetState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.blue;
-    }
-    return Colors.transparent;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,28 +22,38 @@ class Homepage extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("T O D O"),
+                  const Text(
+                    "T O D O",
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Color(0xffFF5A5F),
+                        fontWeight: FontWeight.bold),
+                  ),
                   Row(
                     children: [
                       IconButton(
-                          onPressed: () async {
-                            await FirebaseService()
-                                .deleteAllTaskToFirebase(controller.allDocId);
-                            controller.allDocId.clear();
-                            controller.update();
-                          },
-                          icon: Icon(Icons.delete)),
+                        onPressed: () async {
+                          await FirebaseService()
+                              .deleteAllTaskToFirebase(controller.allDocId);
+                          controller.allDocId.clear();
+                          controller.update();
+                        },
+                        icon: const Icon(Icons.delete),
+                        color: Color(0xffFF5A5F),
+                      ),
                       IconButton(
-                          onPressed: () {
-                            Get.to(() => CompleteTask());
-                          },
-                          icon: Icon(Icons.check_box)),
+                        onPressed: () {
+                          Get.to(() => CompleteTask());
+                        },
+                        icon: const Icon(Icons.check_circle),
+                      ),
                       IconButton(
-                          onPressed: () {
-                            FirebaseAuth.instance.signOut();
-                            Get.offAll(Login());
-                          },
-                          icon: Icon(Icons.logout)),
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                          Get.offAll(Login());
+                        },
+                        icon: const Icon(Icons.logout),
+                      ),
                     ],
                   )
                 ],
@@ -67,7 +65,6 @@ class Homepage extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: controller.allTaskData.length,
                     itemBuilder: (context, index) {
-                      // bool isChecked = false;
                       TaskModel data = controller.allTaskData[index];
 
                       return Padding(
@@ -97,7 +94,7 @@ class Homepage extends StatelessWidget {
                           tileColor:
                               controller.allDocId.contains(data.docId) == true
                                   ? Colors.red
-                                  : Colors.grey,
+                                  : Color(0xffFF5A5F).withOpacity(0.4),
                           leading: IconButton(
                               padding: const EdgeInsets.all(0),
                               onPressed: () {
@@ -108,10 +105,58 @@ class Homepage extends StatelessWidget {
                               },
                               icon: const Icon(
                                   Icons.check_circle_outline_outlined)),
-                          title: Text(data.title),
-                          subtitle: Text(
-                            "${data.description}\nCompleted by: \n${controller.formatDate(data.completedByDate ?? DateTime(2024))} ${controller.formatTimeOfDay(data.completedByTime ?? TimeOfDay(hour: 0, minute: 0))}\nCreated at: ${controller.formatDate(data.createdAt)}",
-                            style: TextStyle(fontSize: 12),
+                          title: Text(data.title,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20)),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.description,
+                                style: const TextStyle(fontSize: 15),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "Completed by: ",
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text:
+                                          "${controller.formatDate(data.completedByDate ?? DateTime(2024))} ${controller.formatTimeOfDay(data.completedByTime ?? const TimeOfDay(hour: 0, minute: 0))}" // The normal part
+                                      ,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "Created at: ",
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: controller.formatDate(
+                                          data.createdAt), // The normal part
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                           trailing: Column(
                             children: [
@@ -125,7 +170,7 @@ class Homepage extends StatelessWidget {
                                         TodoDialog()
                                             .showEditTaskDialog(context, data);
                                       },
-                                      icon: Icon(Icons.edit),
+                                      icon: const Icon(Icons.edit),
                                     ),
                                     IconButton(
                                       onPressed: () async {
@@ -133,7 +178,7 @@ class Homepage extends StatelessWidget {
                                             .deleteAllTaskToFirebase(
                                                 [data.docId ?? ""]);
                                       },
-                                      icon: Icon(Icons.delete),
+                                      icon: const Icon(Icons.delete),
                                     ),
                                   ],
                                 ),
@@ -149,7 +194,7 @@ class Homepage extends StatelessWidget {
                                 width: 50,
                                 height: 20,
                                 child: Center(child: Text(data.priority ?? '')),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -160,9 +205,9 @@ class Homepage extends StatelessWidget {
               ],
             ),
             floatingActionButton: FloatingActionButton(
-                shape: CircleBorder(),
-                backgroundColor: Color(0xffFF5A5F),
-                child: Icon(
+                shape: const CircleBorder(),
+                backgroundColor: const Color(0xffFF5A5F),
+                child: const Icon(
                   Icons.add,
                   color: Colors.white,
                 ),

@@ -6,7 +6,6 @@ import 'package:todo/view/custom_button/button.dart';
 
 class TodoDialog {
   void showPopupTodayTask(BuildContext context, String title, String message) {
-    // Show a popup dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -21,22 +20,31 @@ class TodoDialog {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  title,
+                  "PENDING",
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  '" $title"',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10),
                 Text(
                   message,
                   style: TextStyle(fontSize: 16),
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("dismiss"))
+                Button(
+                    text: "Dismiss",
+                    onTap: () {
+                      Get.back();
+                    })
               ],
             ),
           ),
