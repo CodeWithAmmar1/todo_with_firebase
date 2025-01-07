@@ -31,7 +31,7 @@ class LoginController extends GetxController {
 
       var snackBar = SnackBar(
         content: Text('The account is login ${credential.user!.email}'),
-        backgroundColor: Color(0xffFF5A5F),
+        backgroundColor: const Color(0xffFF5A5F),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -44,73 +44,72 @@ class LoginController extends GetxController {
 
       Future.delayed(const Duration(seconds: 1), () {
         isLoading.value = false;
-        Get.offAll(() => Homepage());
+        Get.offAll(() => const Homepage());
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         var snackBar = SnackBar(
-          content: Text('No user found for that email.'),
-          backgroundColor: Color(0xffFF5A5F),
+          content: const Text('No user found for that email.'),
+          backgroundColor: const Color(0xffFF5A5F),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           elevation: 6.0,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         );
         isLoading.value = false;
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else if (e.code == 'wrong-password') {
         var snackBar = SnackBar(
-          content: Text('Wrong password provided for that user.'),
-          backgroundColor: Color(0xffFF5A5F),
+          content: const Text('Wrong password provided for that user.'),
+          backgroundColor: const Color(0xffFF5A5F),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           elevation: 6.0,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         isLoading.value = false;
-        ;
       } else if (e.code == 'invalid-credential') {
         var snackBar = SnackBar(
-          content: Text('User not exist.'),
-          backgroundColor: Color(0xffFF5A5F),
+          content: const Text('User not exist.'),
+          backgroundColor: const Color(0xffFF5A5F),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           elevation: 6.0,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         isLoading.value = false;
       } else {
         var snackBar = SnackBar(
-          content: Text('${e.code}'),
-          backgroundColor: Color(0xffFF5A5F),
+          content: Text(e.code),
+          backgroundColor: const Color(0xffFF5A5F),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           elevation: 6.0,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         isLoading.value = false;
       }
     } catch (e) {
       var snackBar = SnackBar(
-        content: Text('error : ${e}'),
-        backgroundColor: Color(0xffFF5A5F),
+        content: Text('error : $e'),
+        backgroundColor: const Color(0xffFF5A5F),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         elevation: 6.0,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       isLoading.value = false;

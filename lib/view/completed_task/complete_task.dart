@@ -1,14 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/controller/complete_task_controller.dart';
-import 'package:todo/controller/home_page_controller.dart';
 import 'package:todo/model/task_model.dart';
 import 'package:todo/utils/firebase_service.dart';
-import 'package:todo/view/login/login.dart';
 
 class CompleteTask extends StatelessWidget {
-  CompleteTask({super.key});
+  const CompleteTask({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +17,7 @@ class CompleteTask extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "T O D O",
                     style: TextStyle(
                         fontSize: 22,
@@ -36,7 +33,7 @@ class CompleteTask extends StatelessWidget {
                             controller.allDocId.clear();
                             controller.update();
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.delete,
                             color: Colors.red,
                           )),
@@ -106,9 +103,9 @@ class CompleteTask extends StatelessWidget {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: "Completed by: ",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -127,9 +124,9 @@ class CompleteTask extends StatelessWidget {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: "Created at: ",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -159,7 +156,7 @@ class CompleteTask extends StatelessWidget {
                                             .deleteAllTaskToFirebase(
                                                 [data.docId ?? ""]);
                                       },
-                                      icon: Icon(Icons.delete),
+                                      icon: const Icon(Icons.delete),
                                     ),
                                   ],
                                 ),

@@ -17,7 +17,6 @@ class HomePageController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     fetchInitialData();
     getTaskListner();

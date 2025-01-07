@@ -11,7 +11,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xffF5F5F5),
+        backgroundColor: const Color(0xffF5F5F5),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,7 +20,7 @@ class Login extends StatelessWidget {
                 height: 20,
               ),
               Container(
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
                 child: const Text("Log in",
                     style: TextStyle(
                         fontSize: 48,
@@ -32,7 +32,7 @@ class Login extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 1,
                   height: 1,
-                  color: Color(0xff555555),
+                  color: const Color(0xff555555),
                 ),
               ),
               const SizedBox(
@@ -74,7 +74,8 @@ class Login extends StatelessWidget {
               ),
               Center(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: TextField(
                     controller: _loginController.pass,
                     decoration: const InputDecoration(
@@ -121,7 +122,7 @@ class Login extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Don't have an account?",
                     style: TextStyle(
                         fontSize: 20,
@@ -132,7 +133,7 @@ class Login extends StatelessWidget {
                     onTap: () {
                       Get.to(Signup());
                     },
-                    child: Text(
+                    child: const Text(
                       " Sign up",
                       style: TextStyle(
                           fontSize: 20,

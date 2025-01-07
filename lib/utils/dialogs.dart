@@ -19,26 +19,26 @@ class TodoDialog {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "PENDING",
                   style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.red),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
                   '" $title"',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   message,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 Button(
                     text: "Dismiss",
@@ -180,7 +180,7 @@ class TodoDialog {
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               backgroundColor:
                                   controller.selectedPriority == "High"
                                       ? Colors.red
@@ -197,7 +197,7 @@ class TodoDialog {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               backgroundColor:
                                   controller.selectedPriority == "Medium"
                                       ? Colors.orange
@@ -214,7 +214,7 @@ class TodoDialog {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               backgroundColor:
                                   controller.selectedPriority == "Low"
                                       ? Colors.green
@@ -368,7 +368,7 @@ class TodoDialog {
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               backgroundColor:
                                   controller.selectedPriority == "High"
                                       ? Colors.red
@@ -385,7 +385,7 @@ class TodoDialog {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               backgroundColor:
                                   controller.selectedPriority == "Medium"
                                       ? Colors.orange
@@ -402,7 +402,7 @@ class TodoDialog {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               backgroundColor:
                                   controller.selectedPriority == "Low"
                                       ? Colors.green

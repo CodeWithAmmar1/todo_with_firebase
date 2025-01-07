@@ -39,11 +39,11 @@ class Homepage extends StatelessWidget {
                           controller.update();
                         },
                         icon: const Icon(Icons.delete),
-                        color: Color(0xffFF5A5F),
+                        color: const Color(0xffFF5A5F),
                       ),
                       IconButton(
                         onPressed: () {
-                          Get.to(() => CompleteTask());
+                          Get.to(() => const CompleteTask());
                         },
                         icon: const Icon(Icons.check_circle),
                       ),
@@ -94,7 +94,7 @@ class Homepage extends StatelessWidget {
                           tileColor:
                               controller.allDocId.contains(data.docId) == true
                                   ? Colors.red
-                                  : Color(0xffFF5A5F).withOpacity(0.4),
+                                  : const Color(0xffFF5A5F).withOpacity(0.4),
                           leading: IconButton(
                               padding: const EdgeInsets.all(0),
                               onPressed: () {
@@ -118,9 +118,9 @@ class Homepage extends StatelessWidget {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: "Completed by: ",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -139,9 +139,9 @@ class Homepage extends StatelessWidget {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: "Created at: ",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold,
                                       ),
